@@ -1,4 +1,4 @@
-# Getting Started with AWS
+# Getting Started with AWS DEVOPS COURSE offered by Pylife
 
 ### Reference Documentation
 For further reference, please consider the following sections:
