@@ -1,4 +1,4 @@
-# Getting Started Ravindra sson
+# Getting Started Ravindra mandalapu
 
 ### Reference Documentation
 For further reference, please consider the following sections:
