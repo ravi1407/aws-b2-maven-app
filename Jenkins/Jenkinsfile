@@ -13,7 +13,7 @@ pipeline {
                 }
                     
     parameters {
-            string(name: 'appBranch', defaultValue: 'main', description: "Application Branch name of the Repo")
+            string(name: 'appBranch', defaultValue: 'master', description: "Application Branch name of the Repo")
             string(name: 'gitURL', defaultValue: 'https://github.com/ravi1407/aws-b2-maven-app.git', description: "pass the maven repo source code git url")
                 }            
 
