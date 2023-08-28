@@ -1,0 +1,55 @@
+pipeline {
+    agent {
+        node {
+            label 'awsvm'
+        }
+    }
+    
+     options    {
+                timestamps()
+                buildDiscarder(logRotator(numToKeepStr: '2', artifactNumToKeepStr: '2'))
+                timeout(time: 240, unit: 'MINUTES')
+                disableConcurrentBuilds()
+                }
+                    
+    parameters {
+            string(name: 'appBranch', defaultValue: 'main', description: "Application Branch name of the Repo")
+            string(name: 'gitURL', defaultValue: 'https://github.com/ravi1407/aws-b2-maven-app.git', description: "pass the maven repo source code git url")
+                }            
+
+    stages {
+        stage('checkout') {
+            steps {
+            	git branch: appBranch, url: gitURL
+            }
+        }
+        
+        stage('Maven Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        
+        stage('Docker Build') {
+            steps {
+                sh 'docker build . -f dockerfile_testapp -t ravindra1407/awsmavendemo:latest'
+            }
+        }
+        
+        stage('Docker Login') {
+            steps {
+            
+            withCredentials([usernamePassword(credentialsId: 'dockerlogin', passwordVariable: 'docker_pwd', usernameVariable: 'docker_user')]) {
+            
+            sh 'docker login -u ${docker_user} -p ${docker_pwd}'
+		}
+            }
+        }
+        
+        stage('Docker Push') {
+            steps {
+                sh 'docker push ravindra1407/awsmavendemo:latest'
+            }
+        }
+    }
+}
