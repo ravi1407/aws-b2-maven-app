@@ -1,0 +1,28 @@
+pipeline {
+    agent {
+        node {
+            label 'awsvm'
+        }
+    }
+    
+     options    {
+                timestamps()
+                buildDiscarder(logRotator(numToKeepStr: '2', artifactNumToKeepStr: '2'))
+                timeout(time: 240, unit: 'MINUTES')
+                disableConcurrentBuilds()
+                }
+                    
+    parameters {
+            string(name: 'appBranch', defaultValue: 'master', description: "Application Branch name of the Repo")
+            string(name: 'gitURL', defaultValue: 'https://github.com/ravi1407/aws-b2-maven-app.git', description: "pass the maven repo source code git url")
+                }            
+
+    stages {
+        stage('checkout') {
+            steps {
+            	git branch: appBranch, url: gitURL
+                echo "exit"
+            }
+        }
+    }
+}
