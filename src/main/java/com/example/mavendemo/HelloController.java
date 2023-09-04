@@ -3,12 +3,12 @@ package com.example.mavendemo;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RestController
+@RestController 
 public class HelloController {
 
-    @RequestMapping('/')
+    @RequestMapping("/")
 	public String index() {
-        return "Greetings from Python life Devops class today";
+        return "Greetings from Python life Devops class Today - Aug 19 2023 - Version 0 !";
 	}
 
 }

@@ -51,5 +51,49 @@ pipeline {
                 sh 'docker push ravindra1407/awsmavendemo:latest'
             }
         }
+
+        stage ('K8SManiFest-Checkout') {
+                steps {
+
+                    git 'https://github.com/ravi1407/aws-k8s-cicd.git'
+
+                }
+            }
+
+        stage ('Kubernetes AutoDeployment') {
+  
+
+                steps {
+
+                    dir('manifests')
+                     {
+
+                    sh 'ls -l'
+                    // kubectl apply -f <fileName>.yml
+                    sh 'kubectl --server=https://2272822CA76D509EE17A12C067F191A2.gr7.us-east-1.eks.amazonaws.com --insecure-skip-tls-verify --token="eyJhbGciOiJSUzI1NiIsImtpZCI6IkF0dnNZWWNWd0RqNEFfMDh5WDBmY1lNWjVDd2N3bUpWUjdJRXhaRE1JemcifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImplbmtpbnMtc2EiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiamVua2lucyIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjNiYmM4Mjc3LWViZWUtNDExMy1iYTZhLWQ3MTQ3MzhkZGU0MyIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmplbmtpbnMifQ.Tz9HcktoMuFufyMowegGpN4fClfvZLRNRV8_Bl5U7Z0mBqbhM8971kY1DlURwlEIxshiaEm9_LL4HvEKauUKqjGg7zSYMqlRITQphpO3q8ZMr0-QowsQ3kv5O5OGFQAEAAdFXZKZHuJcJndp3cscO8FyqrW94mc-U-e4CSXtRxoB95X_j6Z52oR-YsQlVk37SX47-xh-CZ1qhE-lfEI4zxwKqlbOZhQxK_KYW2ItjAVC4GSvx_SFJEeF8YRb6ufUNeUGhTjUkaQBUgGDPp3eoROaWxHo3KVEyS7JTHhUIlfvI0AT0Sq2Zt2cXfvtQe6oJ7zgaFAasvqYg-ARc0KmgA" apply -f deployment.yml'
+
+                    sh 'kubectl --server=https://2272822CA76D509EE17A12C067F191A2.gr7.us-east-1.eks.amazonaws.com --insecure-skip-tls-verify --token="eyJhbGciOiJSUzI1NiIsImtpZCI6IkF0dnNZWWNWd0RqNEFfMDh5WDBmY1lNWjVDd2N3bUpWUjdJRXhaRE1JemcifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImplbmtpbnMtc2EiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiamVua2lucyIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjNiYmM4Mjc3LWViZWUtNDExMy1iYTZhLWQ3MTQ3MzhkZGU0MyIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmplbmtpbnMifQ.Tz9HcktoMuFufyMowegGpN4fClfvZLRNRV8_Bl5U7Z0mBqbhM8971kY1DlURwlEIxshiaEm9_LL4HvEKauUKqjGg7zSYMqlRITQphpO3q8ZMr0-QowsQ3kv5O5OGFQAEAAdFXZKZHuJcJndp3cscO8FyqrW94mc-U-e4CSXtRxoB95X_j6Z52oR-YsQlVk37SX47-xh-CZ1qhE-lfEI4zxwKqlbOZhQxK_KYW2ItjAVC4GSvx_SFJEeF8YRb6ufUNeUGhTjUkaQBUgGDPp3eoROaWxHo3KVEyS7JTHhUIlfvI0AT0Sq2Zt2cXfvtQe6oJ7zgaFAasvqYg-ARc0KmgA" apply -f service.yml'
+                    
+                    sh 'kubectl --server=https://2272822CA76D509EE17A12C067F191A2.gr7.us-east-1.eks.amazonaws.com --insecure-skip-tls-verify --token="eyJhbGciOiJSUzI1NiIsImtpZCI6IkF0dnNZWWNWd0RqNEFfMDh5WDBmY1lNWjVDd2N3bUpWUjdJRXhaRE1JemcifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImplbmtpbnMtc2EiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiamVua2lucyIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjNiYmM4Mjc3LWViZWUtNDExMy1iYTZhLWQ3MTQ3MzhkZGU0MyIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmplbmtpbnMifQ.Tz9HcktoMuFufyMowegGpN4fClfvZLRNRV8_Bl5U7Z0mBqbhM8971kY1DlURwlEIxshiaEm9_LL4HvEKauUKqjGg7zSYMqlRITQphpO3q8ZMr0-QowsQ3kv5O5OGFQAEAAdFXZKZHuJcJndp3cscO8FyqrW94mc-U-e4CSXtRxoB95X_j6Z52oR-YsQlVk37SX47-xh-CZ1qhE-lfEI4zxwKqlbOZhQxK_KYW2ItjAVC4GSvx_SFJEeF8YRb6ufUNeUGhTjUkaQBUgGDPp3eoROaWxHo3KVEyS7JTHhUIlfvI0AT0Sq2Zt2cXfvtQe6oJ7zgaFAasvqYg-ARc0KmgA" rollout restart deployment/java-app-deployment'
+                    
+                    echo "kubernetes deployment is done"
+
+                    sh 'kubectl get deployments'
+                    sh 'sleep 100 ; kubectl get services'
+                    
+                    }
+
+                    }
+                }
+        stage('Archive and clean workspace') {
+                steps {
+                    
+                    //archive 'target/demo*.jar'
+                    archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false
+                    cleanWs()
+                }
+
+            }              
+
     }
 }
